@@ -23,21 +23,22 @@ async function bootstrap() {
   // Serve static files from the public directory
   app.useStaticAssets(join(__dirname, '..', 'public'));
 
-  // Catch-all route to serve index.html for client-side routing
-  app.use('*', (req, res) => {
-    res.sendFile(join(__dirname, '..', 'public', 'index.html'));
-  });
-
+  // Middleware for logging requests
   app.use((req, res, next) => {
     console.log(`Request received: ${req.method} ${req.url}`);
     next();
   });
 
-  await app.init(); // Use init() instead of listen() for serverless compatibility
-  await app.listen(3000, '0.0.0.0');
+  // Catch-all route for client-side routing
+  app.use('*', (req, res) => {
+    res.sendFile(join(__dirname, '..', 'public', 'index.html'));
+  });
+
+  // Initialize the app (serverless compatibility)
+  await app.init();
 }
 
 bootstrap();
 
-// Export the server to be used by Vercel
+// Export the server for Vercel to use
 export default server;
