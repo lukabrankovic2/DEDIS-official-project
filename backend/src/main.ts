@@ -20,6 +20,15 @@ async function bootstrap() {
   // Enable CORS
   app.enableCors();
 
+   // Add CSP header middleware
+   app.use((req, res, next) => {
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live;"
+    );
+    next();
+  });
+
   // Serve static files from the public directory
   app.useStaticAssets(join(__dirname, '..', 'public'));
 

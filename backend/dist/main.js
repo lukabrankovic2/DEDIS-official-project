@@ -12,6 +12,10 @@ async function bootstrap() {
     const configService = app.get(config_1.ConfigService);
     console.log('Connected to database:', configService.get('MONGODB_URI'));
     app.enableCors();
+    app.use((req, res, next) => {
+        res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live;");
+        next();
+    });
     app.useStaticAssets((0, path_1.join)(__dirname, '..', 'public'));
     app.use('*', (req, res) => {
         res.sendFile((0, path_1.join)(__dirname, '..', 'public', 'index.html'));
