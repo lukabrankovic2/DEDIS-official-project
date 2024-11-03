@@ -3,9 +3,16 @@ import { AppModule } from './app.module';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import * as express from 'express';
+
+const server = express();
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(
+    AppModule,
+    new ExpressAdapter(server)
+  );
   const configService = app.get(ConfigService);
 
   console.log('Connected to database:', configService.get('MONGODB_URI'));
@@ -21,6 +28,16 @@ async function bootstrap() {
     res.sendFile(join(__dirname, '..', 'public', 'index.html'));
   });
 
-  await app.listen(3000);
+  app.use((req, res, next) => {
+    console.log(`Request received: ${req.method} ${req.url}`);
+    next();
+  });
+
+  await app.init(); // Use init() instead of listen() for serverless compatibility
+  await app.listen(3000, '0.0.0.0');
 }
+
 bootstrap();
+
+// Export the server to be used by Vercel
+export default server;

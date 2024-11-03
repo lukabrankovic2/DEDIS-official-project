@@ -8,6 +8,7 @@ import { AppService } from './app.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // Makes environment variables available throughout the app
+      envFilePath: '../.env',
     }),
     DatabaseModule,
   ],
