@@ -18,6 +18,7 @@ async function bootstrap() {
         res.sendFile((0, path_1.join)(__dirname, '..', 'public', 'index.html'));
     });
     await app.init();
+    await app.listen(3000, '0.0.0.0');
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

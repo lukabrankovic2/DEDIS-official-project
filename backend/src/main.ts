@@ -29,6 +29,7 @@ async function bootstrap() {
 
   // Initialize and listen for serverless compatibility
   await app.init();
+  await app.listen(3000, '0.0.0.0');
 }
 
 bootstrap();
