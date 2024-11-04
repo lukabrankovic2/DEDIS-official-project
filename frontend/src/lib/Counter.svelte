@@ -1,6 +1,4 @@
 <script>
-// @ts-nocheck
-
   let count = $state(0)
   const increment = () => {
     count += 1
