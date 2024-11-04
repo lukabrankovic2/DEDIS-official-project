@@ -21,7 +21,7 @@ async function bootstrap() {
   app.enableCors();
 
    // Add CSP header middleware
-   app.use((req, res, next) => {
+  app.use((req, res, next) => {
     res.setHeader(
       'Content-Security-Policy',
       "default-src 'self'; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live;"
