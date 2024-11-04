@@ -15,12 +15,11 @@ async function bootstrap() {
     AppModule,
     new ExpressAdapter(server)
   );
+  // Enable CORS
+  app.enableCors();
   const configService = app.get(ConfigService);
 
   console.log('Connected to database:', configService.get('MONGODB_URI'));
-
-  // Enable CORS
-  app.enableCors();
 
    // Add CSP header middleware
   app.use((req, res, next) => {
