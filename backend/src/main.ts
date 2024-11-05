@@ -5,7 +5,6 @@ import { AppModule } from './app.module';
 import { join } from 'path';
 import * as express from 'express';
 
-// esgidrugkusdgsdhjlidghlifdhlgi
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(express.static(join(__dirname, '..', 'public')));
