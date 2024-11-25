@@ -1,47 +1,68 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import { writable } from 'svelte/store';
+  import About from './routes/About.svelte';
+  import News from './routes/News.svelte';
+
+  const currentPage = writable('home'); // Default page
+
+  const changePage = (page) => {
+    currentPage.set(page);
+  };
 </script>
 
-<main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: lightblue;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
+
+  nav button {
+    background: transparent;
+    color: #333;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 1rem;
   }
-  .read-the-docs {
-    color: #888;
+
+  nav button:hover {
+    text-decoration: underline;
+  }
+
+  main {
+    margin-top: 80px; /* Push the content below the fixed navbar */
+    padding: 1rem;
+    min-height: calc(100vh - 80px); /* Ensure it covers the full viewport height */
+    box-sizing: border-box;
   }
 </style>
+
+<nav>
+  <button on:click={() => changePage('home')}>Home</button>
+  <button on:click={() => changePage('about')}>About</button>
+  <button on:click={() => changePage('news')}>News</button>
+</nav>
+
+<main>
+  {#if $currentPage === 'home'}
+    <h1>Welcome to the Homepage!</h1>
+  {:else if $currentPage === 'about'}
+    <About />
+  {:else if $currentPage === 'news'}
+    <News />
+  {:else}
+    <h1>Page not found</h1>
+  {/if}
+</main>
