@@ -22,12 +22,24 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+/* Reset margins, padding, and ensure full height for html and body */
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Ensure #app takes the full height of the viewport */
+#app {
+  height: 100%;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #40474b; /* Light background for better contrast */
+  color: #ffffff;
 }
 
 h1 {
@@ -39,11 +51,82 @@ h1 {
   padding: 2em;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Add styles for the navbar */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(128, 212, 240, 0.8); /* Light blue navbar */
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo styling */
+nav .logo {
+  height: 80px;
+  margin-left: 1rem;
+}
+
+/* Navigation buttons container */
+nav .nav-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-right: 1rem;
+}
+
+nav button {
+  background: transparent;
+  color: #333;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0 1rem;
+}
+nav button:hover {
+  text-decoration: underline;
+}
+
+/* Main content styling */
+main {
+  margin-top: 80px; /* Push content below navbar */
+  flex: 1; /* Ensure it fills all remaining space */
+  box-sizing: border-box;
+}
+
+main.home {
+  background: url('/mountain.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin-top: 0;
+  min-height: 100%; /* Ensure it covers the entire container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+main.home .home-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+main.home h1 {
+  font-size: 3em;
+  margin-top: 1rem;
+}
+
+/* Background logo styling */
+main.home .background-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 button {
