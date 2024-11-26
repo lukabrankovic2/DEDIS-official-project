@@ -1,5 +1,5 @@
 <script>
-    // You can add any JavaScript logic here if needed
+    //logic
   </script>
   
   <h1>This is about</h1>
