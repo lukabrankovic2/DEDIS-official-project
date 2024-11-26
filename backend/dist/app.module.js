@@ -16,7 +16,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URI),
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://lukabrankovic2:ujqNwrGz5M0Pakr2@dedis.2p8s7.mongodb.net/?retryWrites=true&w=majority&appName=DEDIS'),
             user_module_1.UserModule,
         ],
         controllers: [],

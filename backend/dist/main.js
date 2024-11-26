@@ -9,6 +9,7 @@ const express = require("express");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(express.static((0, path_1.join)(__dirname, '..', 'public')));
+    app.useLogger(['log', 'error', 'warn', 'debug']);
     await app.listen(3000);
 }
 bootstrap();

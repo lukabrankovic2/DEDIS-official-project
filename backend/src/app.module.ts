@@ -7,7 +7,7 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot('mongodb+srv://lukabrankovic2:ujqNwrGz5M0Pakr2@dedis.2p8s7.mongodb.net/?retryWrites=true&w=majority&appName=DEDIS'),
     UserModule,
   ],
   controllers: [],
