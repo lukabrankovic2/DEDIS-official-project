@@ -2,5 +2,5 @@
     //logic
   </script>
   
-  <h1>This is about</h1>
+  <h1>These are Reports</h1>
   
