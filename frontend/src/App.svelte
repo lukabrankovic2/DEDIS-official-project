@@ -4,6 +4,7 @@
   import News from './routes/News.svelte';
   import Home from './routes/Home.svelte';
   import Signin from './routes/Signin.svelte';
+  import Login from './routes/Login.svelte';
 
   const currentPage = writable('home'); // Current page state
 
@@ -21,6 +22,7 @@
     <button on:click={() => changePage('reports')}>Reports</button>
     <button on:click={() => changePage('news')}>News</button>
     <button on:click={() => changePage('signin')}>Sign In</button>
+    <button on:click={() => changePage('login')}>Log in</button> <!-- Fixed here -->
   </div>
 </nav>
 
@@ -33,6 +35,8 @@
     <News />
   {:else if $currentPage === 'signin'}
     <Signin />
+  {:else if $currentPage === 'login'}
+    <Login />
   {:else}
     <h1>Page not found</h1>
   {/if}

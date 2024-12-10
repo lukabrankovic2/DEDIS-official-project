@@ -3,7 +3,7 @@
 
   let email = '';
   let password = '';
-  let username = ''; // Adding username field
+  let username = '';
 
   async function handleSubmit() {
     if (!username || !email || !password) {
