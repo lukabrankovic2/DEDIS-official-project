@@ -1,9 +1,12 @@
 <script>
-  import { onMount } from 'svelte';
-
   let email = '';
   let password = '';
   let username = '';
+
+  // Dynamically determine the backend URL
+  const BACKEND_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000' // Local
+    : 'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app'; // Deployed
 
   async function handleSubmit() {
     if (!username || !email || !password) {
@@ -12,7 +15,7 @@
     }
 
     try {
-      const response = await fetch('http://localhost:3000/users/signup', {
+      const response = await fetch(`${BACKEND_URL}/users/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
@@ -35,37 +38,16 @@
   <form class="signin-form" on:submit|preventDefault={handleSubmit}>
     <div class="form-group">
       <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        bind:value={username}
-        placeholder="Enter your username"
-        required
-      />
+      <input id="username" type="text" bind:value={username} required />
     </div>
-
     <div class="form-group">
       <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        bind:value={email}
-        placeholder="Enter your email"
-        required
-      />
+      <input id="email" type="email" bind:value={email} required />
     </div>
-
     <div class="form-group">
       <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        bind:value={password}
-        placeholder="Enter your password"
-        required
-      />
+      <input id="password" type="password" bind:value={password} required />
     </div>
-
     <button type="submit">Sign Up</button>
   </form>
 </div>
