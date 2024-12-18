@@ -24,10 +24,7 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors({
-    origin: [
-      'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app',
-      'http://localhost:3000',
-    ],
+    origin: '*', // Allow all origins (not recommended for production)
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
