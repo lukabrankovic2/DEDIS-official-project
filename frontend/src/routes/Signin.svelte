@@ -27,7 +27,7 @@
       }
     } catch (error) {
       console.error('Error during sign up:', error);
-      alert('An error occurred. Please try again later.');
+      alert(`An error occurred: ${error.message}`);
     }
   }
 </script>
