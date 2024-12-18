@@ -11,7 +11,7 @@ async function bootstrap() {
     app.use(express.static((0, path_1.join)(__dirname, '..', 'public')));
     app.enableCors({
         origin: [
-            'dedis-official-project.vercel.app',
+            'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app',
             'http://localhost:3000',
         ],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
