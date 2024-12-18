@@ -22,8 +22,14 @@
       if (response.ok) {
         alert('Successfully signed up!');
       } else {
-        const error = await response.json();
-        alert(`Sign up failed: ${error.message}`);
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const error = await response.json();
+          alert(`Sign up failed: ${error.message}`);
+        } else {
+          const errorText = await response.text();
+          alert(`Sign up failed: ${errorText}`);
+        }
       }
     } catch (error) {
       console.error('Error during sign up:', error);
