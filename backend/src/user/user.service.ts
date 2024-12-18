@@ -39,14 +39,4 @@ export class UserService {
 
     return user; // Return user if validation is successful
   }
-
-  async testDatabaseConnection(): Promise<string> {
-    try {
-      // Simple query to test the database connection
-      const count = await this.userModel.countDocuments();
-      return `Database is connected. Total users: ${count}`;
-    } catch (error) {
-      throw new Error('Database connection test failed');
-    }
-  }
 }
