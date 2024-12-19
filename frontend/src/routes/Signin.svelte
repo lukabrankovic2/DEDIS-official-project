@@ -4,7 +4,9 @@
   let username = '';
 
   // Dynamically determine the backend URL
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+  const BACKEND_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000' // Local
+    : 'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app'; // Deployed
 
   async function handleSubmit() {
     if (!username || !email || !password) {
@@ -22,18 +24,12 @@
       if (response.ok) {
         alert('Successfully signed up!');
       } else {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const error = await response.json();
-          alert(`Sign up failed: ${error.message}`);
-        } else {
-          const errorText = await response.text();
-          alert(`Sign up failed: ${errorText}`);
-        }
+        const error = await response.json();
+        alert(`Sign up failed: ${error.message}`);
       }
     } catch (error) {
       console.error('Error during sign up:', error);
-      alert(`An error occurred: ${error.message}`);
+      alert('An error occurred. Please try again later.');
     }
   }
 </script>

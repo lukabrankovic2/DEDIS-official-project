@@ -3,7 +3,9 @@
   let password = '';
 
   // Dynamically determine the backend URL
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+  const BACKEND_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000' // Local backend for development
+    : 'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app'; // Deployed backend for production
 
   async function handleLogin() {
     if (!email || !password) {
