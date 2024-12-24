@@ -1,10 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = require("dotenv");
-dotenv.config({ path: '../.env' });
+const path_1 = require("path");
+dotenv.config({ path: (0, path_1.join)(__dirname, '..', '.env') });
+if (!process.env.MONGODB_URI) {
+    console.error('MONGODB_URI is not defined. Please check environment variables.');
+    process.exit(1);
+}
+console.log('Environment variables loaded:', process.env.MONGODB_URI);
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
-const path_1 = require("path");
 const express = require("express");
 const database_1 = require("./database/database");
 async function bootstrap() {

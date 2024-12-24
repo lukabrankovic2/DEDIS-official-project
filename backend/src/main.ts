@@ -1,9 +1,15 @@
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '../.env' });
+import { join } from 'path'; // Ensure path is imported before using it
+
+// Load environment variables from .env file
+dotenv.config({ path: join(__dirname, '..', '.env') });
+if (!process.env.MONGODB_URI) {
+  console.error('MONGODB_URI is not defined. Please check environment variables.');
+  process.exit(1);
+}
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { join } from 'path';
 import * as express from 'express';
 import { connectToDatabase } from './database/database';
 

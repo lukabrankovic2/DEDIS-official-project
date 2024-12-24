@@ -5,10 +5,10 @@
 
   // Dynamically determine the backend URL
   const BACKEND_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:3000' // Local
-    : 'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app'; // Deployed
+    ? 'http://localhost:3000'
+    : 'dedis-official-project-git-main-lukabrankovic2s-projects.vercel.app'; // Deployed
 
-  async function handleSubmit() {
+    async function handleSubmit() {
     if (!username || !email || !password) {
       alert('All fields are required.');
       return;
@@ -25,6 +25,7 @@
         alert('Successfully signed up!');
       } else {
         const error = await response.json();
+        console.error('Sign up failed:', error);
         alert(`Sign up failed: ${error.message}`);
       }
     } catch (error) {

@@ -20,8 +20,8 @@ export const connectToDatabase = async () => {
       console.log('Connected to MongoDB successfully.');
       return globalAny.mongoose;
     } catch (error) {
-      console.error('MongoDB connection error:', error.message);
-      throw error; // Rethrow the error to ensure it stops execution
+      console.error('Failed to connect to MongoDB:', error.message);
+      throw error;
     }
   }
 };
