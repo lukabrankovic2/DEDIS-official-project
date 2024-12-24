@@ -5,7 +5,7 @@
   // Dynamically determine the backend URL
   const BACKEND_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000' // Local backend for development
-    : 'https://dedis-official-project-85zt1ufai-lukabrankovic2s-projects.vercel.app'; // Deployed backend for production
+    : 'dedis-official-project.vercel.app'; // Deployed backend for production
 
   async function handleLogin() {
     if (!email || !password) {

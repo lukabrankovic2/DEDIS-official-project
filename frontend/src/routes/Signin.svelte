@@ -6,7 +6,7 @@
   // Dynamically determine the backend URL
   const BACKEND_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
-    : 'https://dedis-official-project-git-main-lukabrankovic2s-projects.vercel.app';
+    : 'https://dedis-official-project.vercel.app/';
 
   async function handleSubmit() {
     if (!username || !email || !password) {
