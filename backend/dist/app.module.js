@@ -19,8 +19,6 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URI),
             user_module_1.UserModule,
         ],
-        controllers: [],
-        providers: [],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

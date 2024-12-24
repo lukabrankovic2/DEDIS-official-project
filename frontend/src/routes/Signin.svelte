@@ -15,7 +15,9 @@
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/users/signup`, {
+      const url = `${BACKEND_URL}/users/signup`;
+      console.log(`Sending request to ${url}`);
+      const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
@@ -24,9 +26,9 @@
       if (response.ok) {
         alert('Successfully signed up!');
       } else {
-        const error = await response.json();
-        console.error('Sign up failed:', error);
-        alert(`Sign up failed: ${error.message}`);
+        const errorText = await response.text();
+        console.error('Sign up failed:', errorText);
+        alert(`Sign up failed: ${errorText}`);
       }
     } catch (error) {
       console.error('Error during sign up:', error);
