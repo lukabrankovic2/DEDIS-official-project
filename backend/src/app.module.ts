@@ -9,7 +9,7 @@ import { UserService } from './user/user.service';
     MongooseModule.forRoot(process.env.MONGODB_URI),
     UserModule,
   ],
-  controllers: [UserController],
-  providers: [UserService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
