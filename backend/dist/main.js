@@ -7,7 +7,6 @@ if (!process.env.MONGODB_URI) {
     console.error('MONGODB_URI is not defined. Please check environment variables.');
     process.exit(1);
 }
-console.log('Environment variables loaded:', process.env.MONGODB_URI);
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const express = require("express");
