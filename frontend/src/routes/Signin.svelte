@@ -51,6 +51,8 @@
       <label for="password">Password</label>
       <input id="password" type="password" bind:value={password} required />
     </div>
-    <button type="submit">Sign Up</button>
+    <div class="form-group">
+      <button type="submit">Sign Up</button>
+    </div>
   </form>
 </div>

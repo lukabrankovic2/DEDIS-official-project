@@ -44,14 +44,18 @@
 
 <h1>Login</h1>
 
-<form on:submit|preventDefault={handleLogin}>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" id="email" bind:value={email} required />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" bind:value={password} required />
-  </div>
-  <button type="submit">Login</button>
-</form>
+<div class="signin-container">
+  <form class="signin-form" on:submit|preventDefault={handleLogin}>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" bind:value={email} required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" bind:value={password} required />
+    </div>
+    <div class="form-group">
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>
