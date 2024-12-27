@@ -10,6 +10,11 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_module_1 = require("./user/user.module");
+const expedition_module_1 = require("./expedition/expedition.module");
+const jwt_1 = require("@nestjs/jwt");
+const auth_guard_1 = require("./auth/auth.guard");
+const dotenv = require("dotenv");
+dotenv.config();
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -18,7 +23,13 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URI),
             user_module_1.UserModule,
+            expedition_module_1.ExpeditionModule,
+            jwt_1.JwtModule.register({
+                secret: process.env.JWT_SECRET,
+                signOptions: { expiresIn: '1h' },
+            }),
         ],
+        providers: [auth_guard_1.AuthGuard],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

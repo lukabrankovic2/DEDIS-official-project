@@ -76,6 +76,15 @@ nav .logo {
   margin-left: 1rem;
 }
 
+nav .user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #333;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
 /* Navigation buttons container */
 nav .nav-buttons {
   display: flex;
@@ -95,7 +104,6 @@ nav button:hover {
   text-decoration: underline;
 }
 
-/* Main content styling */
 main {
   margin-top: 80px; /* Push content below navbar */
   flex: 1; /* Ensure it fills all remaining space */
@@ -229,6 +237,31 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  margin: 0 1rem;
+  background: transparent;
+  color: #333;
+  border: none;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,36 +1,49 @@
 <script>
   import { writable } from 'svelte/store';
-  import Reports from './routes/Reports.svelte';
+  import { user } from './stores/userStore.js'; // Import the user store
+  import { currentPage } from './stores/pageStore.js';
+  import Expeditions from './routes/Expeditions.svelte';
+  import CreateExped from './routes/CreateExped.svelte';
   import News from './routes/News.svelte';
   import Home from './routes/Home.svelte';
   import Signin from './routes/Signin.svelte';
   import Login from './routes/Login.svelte';
 
-  const currentPage = writable('home'); // Current page state
+  $: console.log('Current page:', $currentPage); // Debug statement
 
-  const changePage = (page) => {
-    currentPage.set(page);
-  };
+  function handleLogout() {
+    user.set(null); 
+    currentPage.set('home');
+  }
 </script>
 
 <nav>
-  <!-- Navbar with the logo -->
   <img src="/logo1w.png" alt="Navbar Logo" class="logo" />
-
+  {#if $user}
+    <div class="user-info">
+      <span>Logged in as: {$user.username}</span>
+    </div>
+  {/if}
   <div class="nav-buttons">
-    <button on:click={() => changePage('home')}>Home</button>
-    <button on:click={() => changePage('reports')}>Reports</button>
-    <button on:click={() => changePage('news')}>News</button>
-    <button on:click={() => changePage('signin')}>Sign In</button>
-    <button on:click={() => changePage('login')}>Log in</button> <!-- Fixed here -->
+    <button on:click={() => currentPage.set('home')}>Home</button>
+    <button on:click={() => currentPage.set('expeditions')}>Expeditions</button>
+    <button on:click={() => currentPage.set('news')}>News</button>
+    {#if $user}
+      <button on:click={handleLogout}>Logout</button>
+    {:else}
+      <button on:click={() => currentPage.set('signin')}>Sign In</button>
+      <button on:click={() => currentPage.set('login')}>Log in</button>
+    {/if}
   </div>
 </nav>
 
 <main class:home={$currentPage === 'home'}>
   {#if $currentPage === 'home'}
     <Home />
-  {:else if $currentPage === 'reports'}
-    <Reports />
+  {:else if $currentPage === 'expeditions'}
+    <Expeditions />
+  {:else if $currentPage === 'createExped'}
+    <CreateExped />
   {:else if $currentPage === 'news'}
     <News />
   {:else if $currentPage === 'signin'}
