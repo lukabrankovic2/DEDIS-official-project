@@ -4,10 +4,11 @@
   import { currentPage } from './stores/pageStore.js';
   import Expeditions from './routes/Expeditions.svelte';
   import CreateExped from './routes/CreateExped.svelte';
-  import News from './routes/News.svelte';
+  import Routes from './routes/Routes.svelte';
   import Home from './routes/Home.svelte';
   import Signin from './routes/Signin.svelte';
   import Login from './routes/Login.svelte';
+  import SingleExped from './routes/SingleExped.svelte';
 
   $: console.log('Current page:', $currentPage); // Debug statement
 
@@ -27,7 +28,7 @@
   <div class="nav-buttons">
     <button on:click={() => currentPage.set('home')}>Home</button>
     <button on:click={() => currentPage.set('expeditions')}>Expeditions</button>
-    <button on:click={() => currentPage.set('news')}>News</button>
+    <button on:click={() => currentPage.set('routes')}>Routes</button>
     {#if $user}
       <button on:click={handleLogout}>Logout</button>
     {:else}
@@ -44,8 +45,10 @@
     <Expeditions />
   {:else if $currentPage === 'createExped'}
     <CreateExped />
-  {:else if $currentPage === 'news'}
-    <News />
+  {:else if $currentPage === 'singleExped'}
+    <SingleExped />
+  {:else if $currentPage === 'routes'}
+    <Routes />
   {:else if $currentPage === 'signin'}
     <Signin />
   {:else if $currentPage === 'login'}

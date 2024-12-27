@@ -23,9 +23,9 @@
     fetchExpeditions();
   });
 
-  const navigateToCreateExped = () => {
-    console.log('Navigating to CreateExped'); // Debug statement
-    currentPage.set('createExped');
+  const navigateToExpedition = (id) => {
+    currentPage.set('singleExped');
+    localStorage.setItem('selectedExpeditionId', id);
   };
 </script>
 
@@ -33,7 +33,7 @@
 
 {#if $user}
   <div class="button-container">
-    <button on:click={navigateToCreateExped}>Create Expedition</button>
+    <button on:click={() => currentPage.set('createExped')}>Create Expedition</button>
   </div>
 {/if}
 
@@ -45,5 +45,6 @@
     <p><strong>Members:</strong> {expedition.members}</p>
     <p><strong>Route:</strong> {expedition.route}</p>
     <p><strong>Description:</strong> {expedition.description}</p>
+    <button on:click={() => navigateToExpedition(expedition._id)}>Read more</button>
   </div>
 {/each}

@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_module_1 = require("./user/user.module");
 const expedition_module_1 = require("./expedition/expedition.module");
+const comment_module_1 = require("./comments/comment.module");
 const jwt_1 = require("@nestjs/jwt");
 const auth_guard_1 = require("./auth/auth.guard");
 const dotenv = require("dotenv");
@@ -24,6 +25,7 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URI),
             user_module_1.UserModule,
             expedition_module_1.ExpeditionModule,
+            comment_module_1.CommentModule,
             jwt_1.JwtModule.register({
                 secret: process.env.JWT_SECRET,
                 signOptions: { expiresIn: '1h' },

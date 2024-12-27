@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Body, Req, UseGuards, Get, Param } from '@nestjs/common';
 import { ExpeditionService } from './expedition.service';
 import { CreateExpeditionDto } from './dto/create-expedition.dto';
 import { AuthGuard } from '../auth/auth.guard';
@@ -18,5 +18,10 @@ export class ExpeditionController {
   @Get()
   async findAll() {
     return this.expeditionService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.expeditionService.findOne(id);
   }
 }
