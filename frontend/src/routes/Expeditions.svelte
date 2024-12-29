@@ -8,7 +8,7 @@
   // Dynamically determine the backend URL
   const BACKEND_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
-    : 'https://dedis-official-project.vercel.app/api';
+    : 'https://dedis-official-project.vercel.app';
 
   const fetchExpeditions = async () => {
     try {
