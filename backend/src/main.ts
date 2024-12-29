@@ -1,5 +1,9 @@
 import * as dotenv from 'dotenv';
 import { join } from 'path';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import * as express from 'express';
+import { connectToDatabase } from './database/database';
 
 // Load environment variables from .env file
 dotenv.config({ path: join(__dirname, '..', '.env') });
@@ -7,13 +11,6 @@ if (!process.env.MONGODB_URI) {
   console.error('MONGODB_URI is not defined. Please check environment variables.');
   process.exit(1);
 }
-
-// test
-
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import * as express from 'express';
-import { connectToDatabase } from './database/database';
 
 async function bootstrap() {
   // Connect to the database before starting the application
@@ -27,15 +24,15 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  // Serve static files
-  app.use(express.static(join(__dirname, '..', 'public')));
-
   // Enable CORS
   app.enableCors({
     origin: '*', // Allow all origins (not recommended for production)
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
+
+  // Serve static files
+  app.use(express.static(join(__dirname, '..', 'public')));
 
   // Set custom logger levels
   app.useLogger(['log', 'error', 'warn', 'debug']);
