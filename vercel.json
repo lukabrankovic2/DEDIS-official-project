@@ -16,10 +16,6 @@
       "dest": "/backend/dist/main.js"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/dist/main.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
