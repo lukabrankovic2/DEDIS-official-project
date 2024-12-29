@@ -15,11 +15,7 @@
   ],
   "routes": [
     {
-      "src": "/users/(.*)",
-      "dest": "/dist/main.js"
-    },
-    {
-      "src": "/expeditions/(.*)",
+      "src": "/api/(.*)",
       "dest": "/dist/main.js"
     },
     {
