@@ -1,19 +1,27 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "backend/dist/main.js",
-            "use": "@vercel/node"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/api/(.*)",
-            "dest": "backend/dist/main.js"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/dist/main.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/users/(.*)",
+      "dest": "/backend/dist/main.js"
+    },
+    {
+      "src": "/expeditions/(.*)",
+      "dest": "/backend/dist/main.js"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/dist/main.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }

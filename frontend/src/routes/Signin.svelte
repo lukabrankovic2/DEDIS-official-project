@@ -4,7 +4,6 @@
   let username = '';
 
   // Dynamically determine the backend URL
-  // testing
   const BACKEND_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
     : 'https://dedis-official-project.vercel.app';

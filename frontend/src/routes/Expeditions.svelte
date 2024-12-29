@@ -5,9 +5,14 @@
 
   let expeditions = [];
 
+  // Dynamically determine the backend URL
+  const BACKEND_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://dedis-official-project.vercel.app';
+
   const fetchExpeditions = async () => {
     try {
-      const response = await fetch('http://localhost:3000/expeditions');
+      const response = await fetch(`${BACKEND_URL}/expeditions`);
       if (response.ok) {
         expeditions = await response.json();
         expeditions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
