@@ -8,6 +8,8 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 }
 
+// test
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as express from 'express';
