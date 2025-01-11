@@ -3,4 +3,5 @@ export class CreateExpeditionDto {
   members: string;
   route: string;
   description: string;
+  image: string;
 }

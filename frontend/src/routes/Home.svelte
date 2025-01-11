@@ -4,16 +4,10 @@
 </div>
 
 <div class="text-box">
-  <p>scroll down</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
-  <p>important info here</p>
+  <p>About us:</p>
+  <p>OBALNI ALPINISTIČNI KLUB</p>
+  <p>Zg. Škofije 14</p>
+  <p>6281 Škofije</p>
+  <p>Contact: info@obalniak.si</p>
 
 </div>

@@ -6,9 +6,13 @@
   let comments = [];
   let newComment = '';
 
+  const BACKEND_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://dedis-official-project-git-main-lukabrankovic2s-projects.vercel.app';
+
   const fetchExpedition = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/expeditions/${id}`);
+      const response = await fetch(`${BACKEND_URL}/expeditions/${id}`);
       if (response.ok) {
         expedition = await response.json();
       } else {
@@ -21,7 +25,7 @@
 
   const fetchComments = async (expeditionId) => {
     try {
-      const response = await fetch(`http://localhost:3000/comments/expedition/${expeditionId}`);
+      const response = await fetch(`${BACKEND_URL}/comments/expedition/${expeditionId}`);
       if (response.ok) {
         comments = await response.json();
       } else {
@@ -36,7 +40,7 @@
     if (!newComment.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:3000/comments/create', {
+      const response = await fetch(`${BACKEND_URL}/comments/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,6 +76,9 @@
   <p><strong>Members:</strong> {expedition.members}</p>
   <p><strong>Route:</strong> {expedition.route}</p>
   <p><strong>Description:</strong> {expedition.description}</p>
+  {#if expedition.image}
+    <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />
+  {/if}
 
   <div class="comments-section">
     <h2>Comments</h2>

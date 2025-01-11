@@ -288,6 +288,7 @@ input, textarea {
   margin: 0.5rem 0;
 }
 
+/* COMMENTS */
 .comments-section {
   margin-top: 2rem;
 }
@@ -312,6 +313,26 @@ input, textarea {
 .comment {
   border-bottom: 1px solid #ccc;
   padding: 0.5rem 0;
+}
+
+/* IMAGES */
+img {
+  max-width: 50%;
+  height: auto;
+}
+
+.expedition img {
+  max-width: 50%;
+  height: 50%;
+  display: block;
+  margin: 0;
+}
+
+.single-expedition img {
+  max-width: 75%;
+  height: 75%;
+  display: block;
+  margin: 0 auto;
 }
 
 @media (prefers-color-scheme: light) {

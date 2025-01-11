@@ -17,6 +17,9 @@ export class Expedition extends Document {
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   user: Types.ObjectId;
+
+  @Prop()
+  image: string;
 }
 
 export const ExpeditionSchema = SchemaFactory.createForClass(Expedition);

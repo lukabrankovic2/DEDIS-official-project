@@ -50,6 +50,9 @@
     <p><strong>Members:</strong> {expedition.members}</p>
     <p><strong>Route:</strong> {expedition.route}</p>
     <p><strong>Description:</strong> {expedition.description}</p>
+    {#if expedition.image}
+      <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />
+    {/if}
     <button on:click={() => navigateToExpedition(expedition._id)}>Read more</button>
   </div>
 {/each}

@@ -6,9 +6,18 @@ import * as express from 'express';
 import { connectToDatabase } from './database/database';
 
 // Load environment variables from .env file
-dotenv.config({ path: join(__dirname, '..', '.env') });
+dotenv.config({ path: join(__dirname, '..', '..', '.env') });
+
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
+
 if (!process.env.MONGODB_URI) {
   console.error('MONGODB_URI is not defined. Please check environment variables.');
+  process.exit(1);
+}
+
+if (!process.env.JWT_SECRET) {
+  console.error('JWT_SECRET is not defined. Please check environment variables.');
   process.exit(1);
 }
 
@@ -26,13 +35,14 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors({
-    origin: '*', // Allow all origins (not recommended for production)
+    origin: '*', // Allow all origins
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
 
   // Serve static files
   app.use(express.static(join(__dirname, '..', 'public')));
+  app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
 
   // Set custom logger levels
   app.useLogger(['log', 'error', 'warn', 'debug']);
