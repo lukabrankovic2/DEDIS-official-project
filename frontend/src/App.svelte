@@ -4,6 +4,7 @@
   import { currentPage } from './stores/pageStore.js';
   import Expeditions from './routes/Expeditions.svelte';
   import CreateExped from './routes/CreateExped.svelte';
+  import CreateRoute from './routes/CreateRoute.svelte';
   import Routes from './routes/Routes.svelte';
   import Home from './routes/Home.svelte';
   import Signin from './routes/Signin.svelte';
@@ -49,6 +50,8 @@
     <SingleExped />
   {:else if $currentPage === 'routes'}
     <Routes />
+  {:else if $currentPage === 'createRoute'}
+    <CreateRoute />
   {:else if $currentPage === 'signin'}
     <Signin />
   {:else if $currentPage === 'login'}
