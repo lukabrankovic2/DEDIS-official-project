@@ -9,8 +9,8 @@ export class Expedition extends Document {
   @Prop({ required: true })
   members: string;
 
-  @Prop({ required: true })
-  route: string;
+  @Prop({ type: Types.ObjectId, ref: 'Route', required: true })
+  route: Types.ObjectId;
 
   @Prop({ required: true })
   description: string;

@@ -14,10 +14,10 @@ export class ExpeditionService {
   }
 
   async findAll(): Promise<Expedition[]> {
-    return this.expeditionModel.find().populate('user').exec();
+    return this.expeditionModel.find().populate('user').populate('route').exec();
   }
 
   async findOne(id: string): Promise<Expedition> {
-    return this.expeditionModel.findById(id).populate('user').exec();
+    return this.expeditionModel.findById(id).populate('user').populate('route').exec();
   }
 }

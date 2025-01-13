@@ -4,6 +4,8 @@
   import { currentPage } from '../stores/pageStore.js';
 
   let expeditions = [];
+  let searchQuery = '';
+  let filteredExpeditions = [];
 
   // Dynamically determine the backend URL
   const BACKEND_URL = window.location.hostname === 'localhost'
@@ -16,11 +18,30 @@
       if (response.ok) {
         expeditions = await response.json();
         expeditions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        filteredExpeditions = expeditions;
       } else {
         console.error('Failed to fetch expeditions');
       }
     } catch (error) {
       console.error('Error fetching expeditions:', error);
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim() === '') {
+      filteredExpeditions = expeditions;
+    } else {
+      const query = searchQuery.toLowerCase();
+      filteredExpeditions = expeditions.filter(expedition =>
+        expedition.title.toLowerCase().includes(query) ||
+        expedition.description.toLowerCase().includes(query)
+      );
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
     }
   };
 
@@ -42,13 +63,23 @@
   </div>
 {/if}
 
-{#each expeditions as expedition}
+<div class="search-bar">
+  <input
+    type="text"
+    placeholder="Search expeditions..."
+    bind:value={searchQuery}
+    on:keypress={handleKeyPress}
+  />
+  <button on:click={handleSearch}>Search</button>
+</div>
+
+{#each filteredExpeditions as expedition}
   <div class="expedition">
     <h2>{expedition.title}</h2>
     <p><strong>Posted by:</strong> {expedition.user.username}</p>
     <p><strong>Date:</strong> {new Date(expedition.createdAt).toLocaleString()}</p>
     <p><strong>Members:</strong> {expedition.members}</p>
-    <p><strong>Route:</strong> {expedition.route}</p>
+    <p><strong>Route:</strong> {expedition.route.name}</p>
     <p><strong>Description:</strong> {expedition.description}</p>
     {#if expedition.image}
       <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />
