@@ -6,10 +6,14 @@ import { AuthGuard } from '../auth/auth.guard';
 import { CustomRequest } from '../auth/custom-request.interface';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { LikesService } from '../likes/likes.service';
 
 @Controller('expeditions')
 export class ExpeditionController {
-  constructor(private readonly expeditionService: ExpeditionService) {}
+  constructor(
+    private readonly expeditionService: ExpeditionService,
+    private readonly likesService: LikesService
+  ) {}
 
   @UseGuards(AuthGuard)
   @Post('create')
@@ -36,5 +40,19 @@ export class ExpeditionController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.expeditionService.findOne(id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post(':id/like')
+  async likeExpedition(@Param('id') id: string, @Req() req: CustomRequest) {
+    const userId = req.user.id;
+    await this.likesService.likeExpedition(userId, id);
+    return { message: 'Expedition liked successfully' };
+  }
+
+  @Get(':id/likes')
+  async countLikes(@Param('id') id: string) {
+    const count = await this.likesService.countLikes(id);
+    return { count };
   }
 }

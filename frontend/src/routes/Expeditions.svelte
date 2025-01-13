@@ -18,12 +18,30 @@
       if (response.ok) {
         expeditions = await response.json();
         expeditions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        filteredExpeditions = expeditions;
+        await fetchLikeCounts(); // Ensure this is awaited
+        filteredExpeditions = expeditions; // Update filteredExpeditions after fetching like counts
       } else {
         console.error('Failed to fetch expeditions');
       }
     } catch (error) {
       console.error('Error fetching expeditions:', error);
+    }
+  };
+
+  const fetchLikeCounts = async () => {
+    for (let expedition of expeditions) {
+      try {
+        const response = await fetch(`${BACKEND_URL}/expeditions/${expedition._id}/likes`);
+        if (response.ok) {
+          const data = await response.json();
+          expedition.likeCount = data.count;
+          console.log(`Expedition ${expedition._id} has ${expedition.likeCount} likes`); // Debugging line
+        } else {
+          console.error('Failed to fetch like count for expedition:', expedition._id);
+        }
+      } catch (error) {
+        console.error('Error fetching like count for expedition:', expedition._id, error);
+      }
     }
   };
 
@@ -84,6 +102,7 @@
     {#if expedition.image}
       <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />
     {/if}
+    <p><strong>❤️</strong> {expedition.likeCount ?? 0}</p> <!-- Ensure likeCount is displayed -->
     <button on:click={() => navigateToExpedition(expedition._id)}>Read more</button>
   </div>
 {/each}

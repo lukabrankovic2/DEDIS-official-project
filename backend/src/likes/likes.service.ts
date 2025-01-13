@@ -1,48 +1,22 @@
-// filepath: /home/lukabrankovic/DEDIS-official/backend/src/likes/likes.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
-import { Expedition } from '../expedition/schemas/expedition.schema';
+import { Model } from 'mongoose';
+import { Like } from './schemas/like.schema';
 
 @Injectable()
 export class LikesService {
-  constructor(@InjectModel(Expedition.name) private expeditionModel: Model<Expedition>) {}
+  constructor(@InjectModel(Like.name) private likeModel: Model<Like>) {}
 
-  async likeExpedition(expeditionId: string, userId: string): Promise<Expedition> {
-    const expedition = await this.expeditionModel.findById(expeditionId);
-    if (!expedition) {
-      throw new NotFoundException('Expedition not found');
+  async likeExpedition(userId: string, expeditionId: string): Promise<Like> {
+    const existingLike = await this.likeModel.findOne({ user: userId, expedition: expeditionId }).exec();
+    if (existingLike) {
+      return existingLike;
     }
-
-    if (!expedition.likes.includes(userId)) {
-      expedition.likes.push(userId);
-      await expedition.save();
-    }
-
-    return expedition;
-  }
-
-  async unlikeExpedition(expeditionId: string, userId: string): Promise<Expedition> {
-    const expedition = await this.expeditionModel.findById(expeditionId);
-    if (!expedition) {
-      throw new NotFoundException('Expedition not found');
-    }
-
-    const index = expedition.likes.indexOf(userId);
-    if (index > -1) {
-      expedition.likes.splice(index, 1);
-      await expedition.save();
-    }
-
-    return expedition;
+    const newLike = new this.likeModel({ user: userId, expedition: expeditionId });
+    return newLike.save();
   }
 
   async countLikes(expeditionId: string): Promise<number> {
-    const expedition = await this.expeditionModel.findById(expeditionId);
-    if (!expedition) {
-      throw new NotFoundException('Expedition not found');
-    }
-
-    return expedition.likes.length;
+    return this.likeModel.countDocuments({ expedition: expeditionId }).exec();
   }
 }

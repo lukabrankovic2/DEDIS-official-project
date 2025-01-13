@@ -5,6 +5,7 @@ import { ExpeditionService } from './expedition.service';
 import { ExpeditionController } from './expedition.controller';
 import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
+import { LikesModule } from '../likes/likes.module'; // Import LikesModule
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { JwtModule } from '@nestjs/jwt';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
+    LikesModule, // Add LikesModule to imports
   ],
   controllers: [ExpeditionController],
   providers: [ExpeditionService],

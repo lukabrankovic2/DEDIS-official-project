@@ -5,6 +5,7 @@
   let expedition = null;
   let comments = [];
   let newComment = '';
+  let likeCount = 0;
 
   const BACKEND_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
@@ -15,6 +16,7 @@
       const response = await fetch(`${BACKEND_URL}/expeditions/${id}`);
       if (response.ok) {
         expedition = await response.json();
+        fetchLikeCount(id);
       } else {
         console.error('Failed to fetch expedition');
       }
@@ -33,6 +35,20 @@
       }
     } catch (error) {
       console.error('Error fetching comments:', error);
+    }
+  };
+
+  const fetchLikeCount = async (expeditionId) => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/expeditions/${expeditionId}/likes`);
+      if (response.ok) {
+        const data = await response.json();
+        likeCount = data.count;
+      } else {
+        console.error('Failed to fetch like count');
+      }
+    } catch (error) {
+      console.error('Error fetching like count:', error);
     }
   };
 
@@ -60,6 +76,25 @@
     }
   };
 
+  const likeExpedition = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/expeditions/${expedition._id}/like`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${$user.token}`
+        }
+      });
+
+      if (response.ok) {
+        fetchLikeCount(expedition._id);
+      } else {
+        console.error('Failed to like expedition');
+      }
+    } catch (error) {
+      console.error('Error liking expedition:', error);
+    }
+  };
+
   onMount(() => {
     const id = localStorage.getItem('selectedExpeditionId');
     if (id) {
@@ -74,11 +109,16 @@
   <p><strong>Posted by:</strong> {expedition.user.username}</p>
   <p><strong>Date:</strong> {new Date(expedition.createdAt).toLocaleString()}</p>
   <p><strong>Members:</strong> {expedition.members}</p>
-  <p><strong>Route:</strong> {expedition.route.name}</p> <!-- Display route name -->
+  <p><strong>Route:</strong> {expedition.route.name}</p>
   <p><strong>Description:</strong> {expedition.description}</p>
   {#if expedition.image}
     <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />
   {/if}
+
+  <div class="like-section">
+    <button on:click={likeExpedition}>❤️</button>
+    <span>{likeCount}</span>
+  </div>
 
   <div class="comments-section">
     <h2>Comments</h2>

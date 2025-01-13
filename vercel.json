@@ -16,7 +16,7 @@
     "routes": [
       {
         "src": "/users/(.*)",
-        "dest": "/srct/main.ts"
+        "dest": "/src/main.ts"
       },
       {
         "src": "/expeditions/(.*)",

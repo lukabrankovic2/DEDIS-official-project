@@ -20,6 +20,9 @@ export class Expedition extends Document {
 
   @Prop()
   image: string;
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Like' }] })
+  likes: Types.ObjectId[];
 }
 
 export const ExpeditionSchema = SchemaFactory.createForClass(Expedition);

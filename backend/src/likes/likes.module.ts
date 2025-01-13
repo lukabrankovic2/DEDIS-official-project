@@ -1,15 +1,13 @@
-// filepath: /home/lukabrankovic/DEDIS-official/backend/src/likes/likes.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Expedition, ExpeditionSchema } from '../expedition/schemas/expedition.schema';
+import { Like, LikeSchema } from './schemas/like.schema';
 import { LikesService } from './likes.service';
-import { LikesController } from './likes.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Expedition.name, schema: ExpeditionSchema }]),
+    MongooseModule.forFeature([{ name: Like.name, schema: LikeSchema }]),
   ],
-  controllers: [LikesController],
   providers: [LikesService],
+  exports: [LikesService],
 })
 export class LikesModule {}
