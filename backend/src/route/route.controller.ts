@@ -6,6 +6,8 @@ import { AuthGuard } from '../auth/auth.guard';
 import { CustomRequest } from '../auth/custom-request.interface';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { Express } from 'express';
+import { Multer } from 'multer';
 
 @Controller('routes')
 export class RouteController {
