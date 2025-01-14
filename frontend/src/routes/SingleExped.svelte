@@ -77,12 +77,19 @@
   };
 
   const likeExpedition = async () => {
+    if (!$user) {
+      console.error('User is not logged in');
+      return;
+    }
+
     try {
       const response = await fetch(`${BACKEND_URL}/expeditions/${expedition._id}/like`, {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${$user.token}`
-        }
+        },
+        body: JSON.stringify({ userId: $user.id }) // Include user ID in the request body
       });
 
       if (response.ok) {
@@ -109,7 +116,7 @@
   <p><strong>Posted by:</strong> {expedition.user.username}</p>
   <p><strong>Date:</strong> {new Date(expedition.createdAt).toLocaleString()}</p>
   <p><strong>Members:</strong> {expedition.members}</p>
-  <p><strong>Route:</strong> {expedition.route.name}</p>
+  <p><strong>Route:</strong> {expedition.route}</p> <!-- Ensure route is displayed as a string -->
   <p><strong>Description:</strong> {expedition.description}</p>
   {#if expedition.image}
     <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UnauthorizedException, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Body, Param, UnauthorizedException, Logger } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 
@@ -19,7 +19,13 @@ export class UserController {
   @Post('signup')
   async signup(@Body() body: { username: string; password: string; email: string }) {
     const { username, password, email } = body;
-    return this.userService.createUser(username, password, email);
+    const role = username === 'admin' ? 'admin' : 'rookie hiker';
+    return this.userService.createUser(username, password, email, role);
+  }
+
+  @Patch(':id/role')
+  async updateUserRole(@Param('id') id: string, @Body('role') role: string) {
+    return this.userService.updateUserRole(id, role);
   }
 
   @Post('login')
@@ -30,7 +36,7 @@ export class UserController {
 
     try {
       const user = await this.userService.validateUser(email, password);
-      const payload = { username: user.username, sub: user._id };
+      const payload = { username: user.username, sub: user._id, role: user.role };
       const token = this.jwtService.sign(payload);
       this.logger.log('Login successful for email:', email);
       return {
@@ -39,6 +45,7 @@ export class UserController {
           id: user._id,
           username: user.username,
           email: user.email,
+          role: user.role,
         },
         token,
       };

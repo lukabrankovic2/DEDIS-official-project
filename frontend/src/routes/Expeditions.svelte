@@ -97,7 +97,7 @@
     <p><strong>Posted by:</strong> {expedition.user.username}</p>
     <p><strong>Date:</strong> {new Date(expedition.createdAt).toLocaleString()}</p>
     <p><strong>Members:</strong> {expedition.members}</p>
-    <p><strong>Route:</strong> {expedition.route.name}</p>
+    <p><strong>Route:</strong> {expedition.route}</p> <!-- Ensure route is displayed as a string -->
     <p><strong>Description:</strong> {expedition.description}</p>
     {#if expedition.image}
       <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />

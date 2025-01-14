@@ -33,7 +33,6 @@
 
   <div class="middle-section">
     <h2>News</h2>
-    <!-- Integrate Facebook API or other news content here -->
     <p>Latest news will be displayed here.</p>
   </div>
 
@@ -41,7 +40,7 @@
     <h2>Members</h2>
     <ul>
       {#each members as member}
-        <li>{member.username}</li>
+        <li><b>{member.username}:</b> {member.role}</li>
       {/each}
     </ul>
   </div>

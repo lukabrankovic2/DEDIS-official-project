@@ -6,6 +6,9 @@ import { ExpeditionModule } from './expedition/expedition.module';
 import { CommentModule } from './comments/comment.module';
 import { RouteModule } from './route/route.module';
 import { AuthGuard } from './auth/auth.guard';
+import { LikesModule } from './likes/likes.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -19,8 +22,10 @@ dotenv.config();
     UserModule,
     ExpeditionModule,
     CommentModule,
-    RouteModule
+    RouteModule,
+    LikesModule
   ],
-  providers: [AuthGuard],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

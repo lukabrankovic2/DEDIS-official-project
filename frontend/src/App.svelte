@@ -10,6 +10,7 @@
   import Signin from './routes/Signin.svelte';
   import Login from './routes/Login.svelte';
   import SingleExped from './routes/SingleExped.svelte';
+  import Admin from './routes/Admin.svelte';
 
   $: console.log('Current page:', $currentPage); // Debug statement
 
@@ -23,13 +24,16 @@
   <img src="/logo1w.png" alt="Navbar Logo" class="logo" />
   {#if $user}
     <div class="user-info">
-      <span>Logged in as: {$user.username}</span>
+      <span>{$user.username}: {$user.role}</span>
     </div>
   {/if}
   <div class="nav-buttons">
     <button on:click={() => currentPage.set('home')}>Home</button>
     <button on:click={() => currentPage.set('expeditions')}>Expeditions</button>
     <button on:click={() => currentPage.set('routes')}>Routes</button>
+    {#if $user?.role === 'admin'}
+      <button on:click={() => currentPage.set('admin')}>Admin Console</button>
+    {/if}
     {#if $user}
       <button on:click={handleLogout}>Logout</button>
     {:else}
@@ -56,6 +60,8 @@
     <Signin />
   {:else if $currentPage === 'login'}
     <Login />
+  {:else if $currentPage === 'admin'}
+    <Admin />
   {:else}
     <h1>Page not found</h1>
   {/if}

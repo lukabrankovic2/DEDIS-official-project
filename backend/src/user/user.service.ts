@@ -10,9 +10,9 @@ export class UserService {
 
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async createUser(username: string, password: string, email: string): Promise<User> {
+  async createUser(username: string, password: string, email: string, role: string): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new this.userModel({ username, password: hashedPassword, email });
+    const newUser = new this.userModel({ username, password: hashedPassword, email, role });
     return newUser.save();
   }
 
@@ -32,6 +32,10 @@ export class UserService {
 
     this.logger.log('User validated successfully:', email);
     return user;
+  }
+
+  async updateUserRole(userId: string, role: string): Promise<User> {
+    return this.userModel.findByIdAndUpdate(userId, { role }, { new: true }).exec();
   }
 
   async findAll(): Promise<User[]> {
