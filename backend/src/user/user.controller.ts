@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UnauthorizedException, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Body, UnauthorizedException, Logger } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 
@@ -10,6 +10,11 @@ export class UserController {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
+
+  @Get()
+  async getAllUsers() {
+    return this.userService.findAll();
+  }
 
   @Post('signup')
   async signup(@Body() body: { username: string; password: string; email: string }) {

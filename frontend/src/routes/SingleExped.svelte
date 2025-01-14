@@ -116,8 +116,8 @@
   {/if}
 
   <div class="like-section">
-    <button on:click={likeExpedition}>❤️</button>
-    <span>{likeCount}</span>
+    <button on:click={likeExpedition}>Like</button>
+    <span>  {likeCount}</span>
   </div>
 
   <div class="comments-section">

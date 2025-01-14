@@ -145,6 +145,26 @@ main.home .background-logo {
   margin-bottom: 1rem;
 }
 
+.home-container-wrapper {
+  padding: 0 20px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+  width: 100%; 
+}
+
+.left-section, .middle-section, .right-section {
+  flex-basis: 33.33%;
+  padding: 20px;
+  background-color: rgba(176, 196, 222, 0.8);
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
 .text-box {
   margin-top: 80px; /* Adjust this to control how far down the content appears */
   padding: 20px;

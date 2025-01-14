@@ -33,4 +33,8 @@ export class UserService {
     this.logger.log('User validated successfully:', email);
     return user;
   }
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
+  }
 }

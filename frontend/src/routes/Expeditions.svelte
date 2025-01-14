@@ -102,7 +102,7 @@
     {#if expedition.image}
       <img src={`${BACKEND_URL}/uploads/${expedition.image}`} alt="{expedition.title}" />
     {/if}
-    <p><strong>❤️</strong> {expedition.likeCount ?? 0}</p> <!-- Ensure likeCount is displayed -->
+    <p><strong>❤️</strong> {expedition.likeCount ?? 0}</p>
     <button on:click={() => navigateToExpedition(expedition._id)}>Read more</button>
   </div>
 {/each}
